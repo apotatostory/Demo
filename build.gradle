@@ -1,0 +1,63 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.0.M5'
+	}
+	repositories {
+		mavenCentral()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+jar {
+    baseName = 'gs-accessing-data-mongodb'
+    version =  '0.1.0'
+}
+
+group = 'src.main.java.com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven { url "https://repo.spring.io/snapshot" }
+	maven { url "https://repo.spring.io/milestone" }
+}
+
+
+dependencies {
+	// 该依赖对于编译发行是必须的
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
+	// 添加 Spring Data Mongodb 的依赖
+	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+	compile('org.springframework.boot:spring-boot-starter-data-rest')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.session:spring-session-core')
+	//mongoDBDialect
+	compile('org.hibernate.ogm:hibernate-ogm-mongodb:5.2.0.Beta1')
+	
+	// 添加  Embedded MongoDB 的依赖用于测试
+	compile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
+	
+	compileOnly('org.projectlombok:lombok')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	
+	//Spring Data MongoDB
+    compile('org.springframework.data:spring-data-mongodb:2.0.1.RELEASE')
+	compile('org.springframework.data:spring-data-jpa')
+
+	//Utils
+	compile('org.apache.commons:commons-lang3:3.6')
+}
