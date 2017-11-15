@@ -2,10 +2,10 @@ package com.example.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Id;
 import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -55,7 +55,7 @@ public class User implements Serializable {
 	public void setLASTNAME(String LASTNAME) {
 		this.LASTNAME = LASTNAME;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Hello! " + this.FIRSTNAME + " " + this.LASTNAME;

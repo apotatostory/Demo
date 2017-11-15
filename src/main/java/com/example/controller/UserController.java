@@ -1,12 +1,17 @@
 package com.example.controller;
 
 import java.util.logging.Logger;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.Service.UserService;
 import com.example.entity.User;
 
 @RestController
+
+
 @RequestMapping(value = "/User")
 public class UserController {
 	Logger logger = Logger.getLogger(UserController.class.getName());
