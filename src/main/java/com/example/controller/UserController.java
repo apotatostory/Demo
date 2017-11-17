@@ -2,21 +2,33 @@ package com.example.controller;
 
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.Service.UserService;
 import com.example.entity.User;
 
 @RestController
-
-
+@EnableAutoConfiguration
 @RequestMapping(value = "/User")
 public class UserController {
 	Logger logger = Logger.getLogger(UserController.class.getName());
-	UserService userService;
+	
+	private final UserService userService;
+	
+	/**********************************************************************************
+	 * 
+	 * Constructor : 請勿修改
+	 * 
+	 **********************************************************************************/
+	@Autowired
+	public UserController(UserService userService) {
+		super();
+		this.userService = userService;
 
+	}
+	
 	/**
 	 * 查詢User全部資料
 	 * 

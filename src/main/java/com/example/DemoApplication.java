@@ -14,9 +14,7 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 		logger.info("=======DemoApplication start!!!!");
-
 		SpringApplication.run(DemoApplication.class, args);
-
 		logger.info("=======DemoApplication end!!!!");
 	}
 }

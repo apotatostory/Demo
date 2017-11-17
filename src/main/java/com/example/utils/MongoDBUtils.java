@@ -19,11 +19,12 @@ public class MongoDBUtils {
 	public static void main(String args[]) {
 		try {
 			// Connect to mongodb server
+			@SuppressWarnings("resource")
 			MongoClient mongoClient = new MongoClient("localhost", 27017);
 
 			// Connect to DB
 			MongoDatabase mongoDatabase = mongoClient.getDatabase("shop");
-			MongoCollection mongoCollection = mongoDatabase.getCollection("USER");
+			MongoCollection<?> mongoCollection = mongoDatabase.getCollection("USER");
 			logger.info("=====mongoCollection: " + mongoCollection.count());
 			logger.info("Connect to DB successfully!");
 		} catch (Exception e) {
