@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
+            http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+            
+	<bean id="jpaVendorAdapter_DB2" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+	    <property name="database" value="DB2" />
+	</bean>
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:spring/database.properties</value>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<!-- *******************************XA Transaction使用的EntityManager******************************* -->
+	
+	<bean id="dataSource_AA" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<!-- Connection properties -->
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<property name="jdbcUrl" value="${jdbc.url.aa}" />
+		<property name="user" value="${jdbc.user.aa}" />
+		<property name="password" value="${jdbc.pwd.aa}" />
+		<!-- Pool properties -->
+		<property name="minPoolSize" value="${c3p0.minPoolSize}" />
+		<property name="maxPoolSize" value="${c3p0.maxPoolSize}" />
+		<property name="acquireIncrement" value="${c3p0.acquireIncrement}" />
+		<property name="maxStatements" value="${c3p0.maxStatements}" />
+		<property name="idleConnectionTestPeriod" value="${c3p0.idleConnectionTestPeriod}" />
+		<property name="maxIdleTime" value="${c3p0.maxIdleTime}" />
+	</bean>
+
+	<bean id="entityManagerFactory_AA" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="aa" />
+		<property name="packagesToScan">
+			<list>
+				<value>com.chb.ebank.database.entities.aa</value>
+			</list>
+		</property>
+		<property name="jpaProperties">
+			<props>
+            	<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+        	</props>
+		</property>
+
+		<property name="dataSource" ref="dataSource_AA" />
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter_DB2" />
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager_AA" />
+	<bean id="transactionManager_AA" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory_AA" />
+	</bean>
+	
+	<jpa:repositories base-package="com.chb.ebank.database.repositories.aa"
+		entity-manager-factory-ref="entityManagerFactory_AA"
+		transaction-manager-ref="transactionManager_AA" />
+		
+	<!-- *************************************************************************************** -->
+</beans>
