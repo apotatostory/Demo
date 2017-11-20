@@ -2,15 +2,21 @@ package com.example.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+
 import com.example.repository.UserRepository;
 
+@Entity(name = "USER")
 @Document(collection = "USER")
 public class User implements Serializable {
 
@@ -24,6 +30,8 @@ public class User implements Serializable {
 	private UserRepository userRepository;
 
 	@Id
+	@Type(type = "objectid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String ID;
 
 	@Field(value = "FirstName")

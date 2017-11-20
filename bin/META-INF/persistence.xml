@@ -16,5 +16,27 @@
             <property name="hibernate.ogm.datastore.provider" value="infinispan"/>
         </properties>
     </persistence-unit>
+    <!-- 自訂實例 -->
+    <persistence-unit name="ogm-jpa-tutorial" transaction-type="JTA">
+        <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+        <properties>
+        	<property name="hibernate.ogm.datastore.provider" value="mongodb" />
+            <property name="hibernate.ogm.datastore.host" value="127.0.0.1:27017"/>
+            <property name="hibernate.ogm.datastore.database" value="shop" />
+            <property name="hibernate.ogm.datastore.create_database" value="true"/>
+            <property name="hibernate.ogm.datastore.username" value="admin" />
+            <property name="hibernate.ogm.datastore.password" value="password"/>
+            <property name="hibernate.ogm.mongodb.authentication_database" value="admin" />
+            <property name="hibernate.ogm.mongodb.authentication_mechanism" value="BEST"/>
+            <property name="hibernate.ogm.datastore.document.association_storage" value="IN_ENTITY" />
+            <property name="hibernate.ogm.datastore.document.map_storage" value="AS_LIST"/>
+            <property name="hibernate.transaction.jta.platform" value="JBossTS" />
+            <property name="hibernate.ogm.datastore.provider" value="infinispan"/>
+            <property name="hibernate.transaction.jta.platform" value="JBossTS" />
+            <property name="hibernate.ogm.datastore.provider" value="infinispan"/>
+            <property name="hibernate.ogm.datastore.document.association_storage" value="IN_ENTITY" />
+            <property name="hibernate.ogm.mongodb.association_document_storage" value="GLOBAL_COLLECTION" />
+        </properties>
+    </persistence-unit>
 
 </persistence>
