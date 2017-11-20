@@ -5,3 +5,4 @@ https://docs.jboss.org/hibernate/stable/ogm/reference/en-US/html_single/?v=5.1#_
 紀錄
 把persistence.xml文件完成
 transaction-type="JTA" 用法搞清楚
+111
