@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.example.Service.UserService;
 import com.example.entity.User;
 
@@ -14,21 +15,10 @@ import com.example.entity.User;
 @RequestMapping(value = "/User")
 public class UserController {
 	Logger logger = Logger.getLogger(UserController.class.getName());
-	
-	private final UserService userService;
-	
-	/**********************************************************************************
-	 * 
-	 * Constructor : 請勿修改
-	 * 
-	 **********************************************************************************/
-	@Autowired
-	public UserController(UserService userService) {
-		super();
-		this.userService = userService;
 
-	}
-	
+	@Autowired
+	UserService userService;
+
 	/**
 	 * 查詢User全部資料
 	 * 
@@ -37,17 +27,17 @@ public class UserController {
 	 */
 	@RequestMapping("/find")
 	public User find() throws Exception {
-		logger.info("##### test start!!! #####");
+		logger.info("##### find start!!! #####");
 
 		User result = new User();
 
 		try {
 			result = userService.doFind();
 		} catch (Exception e) {
-			System.out.println("===== test Exception!!! =====");
+			System.out.println("===== find Exception!!! =====");
 			e.printStackTrace();
 		}
-		logger.info("##### test end!!! #####");
+		logger.info("##### find end!!! #####");
 		return result;
 	}
 
@@ -61,7 +51,10 @@ public class UserController {
 	public User save() throws Exception {
 		logger.info("##### save start!!! #####");
 
-		User result = new User("Vivian", "Lee");
+		User result = new User();
+
+		result.setFirstName("Lee");
+		result.setLastName("Vivian");
 
 		try {
 			userService.doSave(result);

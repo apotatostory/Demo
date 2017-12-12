@@ -1,8 +1,9 @@
 package com.example.Service;
 
-import javax.persistence.PersistenceContext;
+import java.util.logging.Logger;
 
-import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.entity.User;
 import com.example.repository.UserRepository;
@@ -13,13 +14,15 @@ import com.example.repository.UserRepository;
  * @author Tim
  *
  */
-@PersistenceContext(unitName = "character")
+@Service
 public class UserService {
 	Logger logger = Logger.getLogger(UserService.class.getName());
+	
+	@Autowired
 	private UserRepository userRepository;
 
 	public User doFind() {
-		User user = userRepository.findByFirstName("Tim");
+		User user = userRepository.findByFirstName("Lee").get(0);
 		logger.info("=====user: " + user.toString());
 		return user;
 	}

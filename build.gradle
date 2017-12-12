@@ -36,41 +36,13 @@ repositories {
 
 
 dependencies {
-	// 该依赖对于编译发行是必须的
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
+	// MongoDB啟動器(最重要的東西)
+	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 	
-	//Spring Data MongoDB
-    compile('org.springframework.data:spring-data-mongodb:2.0.1.RELEASE')
-	compile('org.springframework.data:spring-data-jpa')
-	
-	// 添加  Embedded MongoDB 的依赖用于测试
-	compile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
-	
-	// 添加 Spring Data Mongodb 的依赖
-	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
+	//可渲染模板
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile('org.springframework.session:spring-session-core')
-	
-	/**  以下為OGM */
-	//OGM必要的CORE
-	compile('org.hibernate.ogm:hibernate-ogm-core:5.2.0.Beta1')
-	
-	//mongoDBDialect
-	compile('org.hibernate.ogm:hibernate-ogm-mongodb:5.2.0.Beta1')
-	
-	//JBOSS JTA manage
-	compile('org.hibernate.ogm:hibernate-ogm-bom:5.0.4.Final')
-	compile('org.hibernate.ogm:hibernate-ogm-infinispan:5.0.4.Final')
-	compile('org.hibernate.javax.persistence:hibernate-jpa-2.1-api')
-	compile('org.hibernate.ogm:hibernate-ogm-infinispan')
-	compile('org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec')
-	compile('org.jboss.narayana.jta:narayana-jta:5.7.1.Final')
-	compile('org.jboss:jboss-transaction-spi')
 
-	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
 	//Utils

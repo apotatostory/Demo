@@ -1,72 +1,56 @@
 package com.example.entity;
 
-import java.io.Serializable;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Transient;
-
-import org.hibernate.annotations.Type;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-
-import com.example.repository.UserRepository;
-
-@Entity(name = "USER")
 @Document(collection = "USER")
-public class User implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	@Autowired
-	@Transient
-	private UserRepository userRepository;
+public class User {
 
 	@Id
-	@Type(type = "objectid")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String ID;
+	private String id;
+	@Field(value = "FIRSTNAME")
+	private String firstName;
+	@Field(value = "LASTNAME")
+	private String lastName;
+	@Field(value = "DESC")
+	private String desc;
 
-	@Field(value = "FirstName")
-	private String FIRSTNAME;
-
-	@Field(value = "LastName")
-	private String LASTNAME;
-
-	public User() {
+	public String getId() {
+		return id;
 	}
 
-	public User(String FIRSTNAME, String LASTNAME) {
-		this.FIRSTNAME = FIRSTNAME;
-		this.LASTNAME = LASTNAME;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getFIRSTNAME() {
-		return FIRSTNAME;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFIRSTNAME(String FIRSTNAME) {
-		this.FIRSTNAME = FIRSTNAME;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getLASTNAME() {
-		return LASTNAME;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLASTNAME(String LASTNAME) {
-		this.LASTNAME = LASTNAME;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 
 	@Override
 	public String toString() {
-		return "Hello! " + this.FIRSTNAME + " " + this.LASTNAME;
+		return "Hello! " + this.firstName + " " + this.lastName;
 	}
 
 }
