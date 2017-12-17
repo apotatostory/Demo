@@ -15,11 +15,10 @@ public class DemoApplication {
 	RepositoryFactory repositoryFactory;
 
 	public static void main(String[] args) {
-
 		logger.info("=======DemoApplication start!!!!");
-
+		
 		SpringApplication.run(DemoApplication.class, args);
-
+		
 		logger.info("=======DemoApplication end!!!!");
 	}
 }
